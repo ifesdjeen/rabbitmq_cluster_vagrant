@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 
 Vagrant::Config.run do |m|
-  [1,2,3].each do |i|
+  [2,3,4].each do |i|
     m.vm.define "rabbitmq_node_#{i}" do |rabbit_node|
       rabbit_node.vm.box = "precise64"
       rabbit_node.vm.customize ["modifyvm", :id,
@@ -27,10 +27,11 @@ Vagrant::Config.run do |m|
         chef.add_recipe "rabbitmq::mgmt_console"
 
         chef.json = {
-          :hostfile_entries => {"192.168.60.1" => "rabbit",
-            "192.168.60.1" => "node01",
+          :hostfile_entries => {"192.168.60.#{i}" => "rabbit",
             "192.168.60.2" => "node02",
-            "192.168.60.3" => "node03"},
+            "192.168.60.3" => "node03",
+            "192.168.60.4" => "node04"
+          },
           :rabbitmq => {
             :nodename => "node0#{i}",
             :address => "192.168.60.#{i}",
@@ -39,7 +40,7 @@ Vagrant::Config.run do |m|
             :enabled_plugins => ["rabbitmq_management", "rabbitmq_management_visualiser"],
             :version => "3.1.4",
             :cluster => true,
-            :cluster_disk_nodes => ['node01@node01', 'node02@node02']
+            :cluster_disk_nodes => ['node02@node02', 'node03@node03']
           }
         }
       end

@@ -21,7 +21,7 @@ And run:
 vagrant up
 ```
 
-Connect to one of nodes from rabbitmq, ips are: 192.168.60.1, 192.168.60.2, 192.168.60.3. Or change the IPs in accordance with your required setup.
+Connect to one of nodes from rabbitmq, ips are: 192.168.60.2, 192.168.60.3, 192.168.60.4. Or change the IPs in accordance with your required setup.
 
 ## License
 
